@@ -5,27 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Facturas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Generador de Facturas PDF</h1>
-        <form method="POST" action="/generar-pdf">
-            <div class="form-group">
-                <label for="id_factura">ID de Factura:</label>
-                <input type="text" id="id_factura" name="id_factura" required>
-            </div>
-            <button type="submit">Generar PDF</button>
-        </form>
-        
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
+    <div class="page">
+        <header class="header">
+            <div class="header-inner">
+                <div class="logo">
+                    <div class="logo-icon">📄</div>
+                    <span class="logo-text">FacturaPDF</span>
                 </div>
-            {% endif %}
-        {% endwith %}
+                <span class="header-badge">Sistema de Facturación</span>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="hero">
+                <h1 class="hero-title">Generador de<br><span class="highlight">Facturas PDF</span></h1>
+                <p class="hero-subtitle">Genera facturas profesionales en segundos. Ingresa el número de factura y descarga tu PDF al instante.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🧾</div>
+                    <div>
+                        <h2 class="card-title">Nueva Factura</h2>
+                        <p class="card-subtitle">Completa el formulario para generar tu documento</p>
+                    </div>
+                </div>
+
+                <form method="POST" action="/generar-pdf" class="form">
+                    <div class="form-group">
+                        <label for="id_factura" class="label">Número de Factura</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">#</span>
+                            <input type="text" id="id_factura" name="id_factura"
+                                   placeholder="Ej: FAC-2025-001" required class="input">
+                        </div>
+                        <p class="input-hint">Formato sugerido: FAC-YYYY-NNN</p>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        <span class="btn-icon">⬇️</span>
+                        Generar y Descargar PDF
+                    </button>
+                </form>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert">
+                            <span class="alert-icon">⚠️</span>
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Rápido</h3>
+                    <p>Generación instantánea de documentos PDF</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Profesional</h3>
+                    <p>Diseño limpio y formato empresarial</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Completo</h3>
+                    <p>Incluye empresa, cliente, detalle e impuestos</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© 2025 FacturaPDF — LPA2 Taller 2</p>
+        </footer>
     </div>
 </body>
 </html>
